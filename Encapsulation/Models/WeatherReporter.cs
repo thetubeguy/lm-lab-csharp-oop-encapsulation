@@ -3,36 +3,55 @@ namespace Encapsulation.Models
 {
     public class WeatherReporter
     {
-        public string Location;
-        public double Temperature;
+        const int TooHot = 30;
+        const int TooCold = 10;
 
-        public WeatherReporter(string location, double temperature)
+        private readonly string _location;
+        private readonly double _temperature_in_C;
+
+        public WeatherReporter(string location, double temperature_in_C)
         {
-            Location = location;
-            Temperature = temperature;
+            _location = location;
+            _temperature_in_C = temperature_in_C;
         }
 
-        public string Print()
+  
+        public string GetWeather(bool Use_F_Scale)
         {
-            double newTemp = (9.0 / 5.0) * Temperature + 32;
-            return $"I am in {Location} and it is {Check1()}. {Check2()}. The temperature in Fahrenheit is {newTemp}.";
+ 
+            if(Use_F_Scale)
+                return ($"I am in {_location} and it is {Get_Weather_Conditions(_location)}. {How_Is_The_Temperature()}. The temperature in Fahrenheit is {Convert_To_Fahrenheit(_temperature_in_C)}.");
+            else
+                return ($"I am in {_location} and it is {Get_Weather_Conditions(_location)}. {How_Is_The_Temperature()}. The temperature in Centigrade is {_temperature_in_C}.");
         }
 
-        public string Check1()
+
+        public string GetWeather()
         {
-            if (Location == "London")
+            return GetWeather(true);
+        }
+
+        private static double Convert_To_Fahrenheit(double temp_in_C)
+        {
+            return (9.0 / 5.0) * temp_in_C + 32;
+         
+        }
+
+        private static string Get_Weather_Conditions(string location)
+        {
+            if (location == "London")
             {
 
                 return "🌦";
 
             }
-            else if (Location == "California")
+            else if (location == "California")
             {
 
                 return "🌅";
 
             }
-            else if (Location == "Cape Town")
+            else if (location == "Cape Town")
             {
 
                 return "🌤";
@@ -41,15 +60,15 @@ namespace Encapsulation.Models
             return "🔆";
         }
 
-        public string Check2()
+        private string How_Is_The_Temperature()
         {
-            if (Temperature > 30)
+            if (_temperature_in_C > TooHot)
             {
 
                 return "It's too hot 🥵!";
 
             }
-            else if (Temperature < 10)
+            else if (_temperature_in_C < TooCold)
             {
 
                 return "It's too cold 🥶!";
