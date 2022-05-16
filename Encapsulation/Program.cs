@@ -38,8 +38,8 @@ SecureBankAccount mySecureBankAccount = new(MY_ACCOUNT_NUMBER);
 Console.WriteLine("What is my current balance?");
 mySecureBankAccount.DisplayAccountBalanceDetails();
 
-Console.WriteLine("Let's deposit an amount of 30");
-mySecureBankAccount.DepositAmount(30);
+Console.WriteLine("Let's deposit an amount of 0");
+mySecureBankAccount.DepositAmount(0);
 mySecureBankAccount.DisplayAccountBalanceDetails();
 
 Console.WriteLine("Wow! Looks like we get a reward of 50 when we deposit an amount");
@@ -53,6 +53,6 @@ mySecureBankAccount.DisplayAccountBalanceDetails();
 
 Console.WriteLine("Let's make a lot of money right now! Let's change the account balance directly!");
 Console.WriteLine("Oh no :( It looks like we can't do this - it's too secure!");
-//mySecureBankAccount._accountBalance = 1000000;
+mySecureBankAccount.DebitAmount(-1000000);
 mySecureBankAccount.DisplayAccountBalanceDetails();
-Console.WriteLine("😹 Well I guess that's secure!");
+Console.WriteLine("😹 Well I guess that's secure! (not)");
